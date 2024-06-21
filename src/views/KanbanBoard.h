@@ -31,11 +31,13 @@ public:
 				}
 
 				void moveTaskCard(wxSharedPtr<TaskCard> taskCard, int newStatus) {
-								auto it = std::find_if(this->taskCards.begin(), this->taskCards.end(), [taskCard](const wxSharedPtr<TaskCard>& t) {
-												return t.get() == taskCard; // compare pointers
+								wxSharedPtr<TaskCard> taskCardToFind;
+								auto it = std::find_if(taskCards.begin(), taskCards.end(), 
+												[taskCard](const wxSharedPtr<TaskCard>& t) {
+												return *t == *taskCard; // compare pointers (operator equality)
 												});
 
-								if (it != this->taskCards.end()) { // task found
+								if (it != taskCards.end()) { // task found
 												// update the status
 											// (**it).setStatus(newStatus); // Dereference twice to access the task object and call its method
 								}
@@ -67,8 +69,8 @@ private:
 
 				// repeated code
 				int findTaskIndex(const wxSharedPtr<TaskCard> taskCard) const {
-								for (size_t i = 0; i < this->taskCards.size(); i++) {
-												if (this->taskCards[i].get() == taskCard) {
+								for (size_t i = 0; i < taskCards.size(); i++) {
+												if (taskCards.at(i) == taskCard) {
 																return i;
 												}
 								}

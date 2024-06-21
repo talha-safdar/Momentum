@@ -25,7 +25,7 @@ public:
     // chaege pointer from * to wxWidgets
     void moveTask(wxSharedPtr<Task> task, int newStatus) {
         // Find a task in the tasks vector
-        wxSharedPtr<Task> taskToFind = /* ... get the task you want to find ... */;
+        wxSharedPtr<Task> taskToFind; // = /* ... get the task you want to find ... */;
         auto it = std::find_if(tasks.begin(), tasks.end(),
             [taskToFind](const wxSharedPtr<Task>& t) {
                 return *t == *taskToFind;

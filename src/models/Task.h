@@ -4,7 +4,7 @@
 
 class Task {
 public:
-				Task() {}
+				Task() {};
 
 				std::string getTitle() {
 								return this->title;

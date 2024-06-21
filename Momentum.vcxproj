@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\views\Columns.cpp" />
     <ClCompile Include="src\controllers\KanbanController.cpp" />
     <ClCompile Include="src\views\KanbanBoard.cpp" />
     <ClCompile Include="src\app.cpp" />
@@ -170,6 +171,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\views\Columns.h" />
     <ClInclude Include="src\controllers\KanbanController.h" />
     <ClInclude Include="src\views\KanbanBoard.h" />
     <ClInclude Include="src\models\Task.h" />

@@ -11,7 +11,7 @@ public:
 				}
 
 				void removeTask(Task* task) {
-        int indexToRemove = findTaskIndex(&task); // Find the index of the task (if it exists)
+        int indexToRemove = findTaskIndex(task); // Find the index of the task (if it exists)
         if (indexToRemove != -1) { // Check if the task was found
             tasks.erase(tasks.begin() + indexToRemove); // Remove the task at the specified index
             // std::cout << "Task removed successfully!" << std::endl;
@@ -20,6 +20,30 @@ public:
             // std::cout << "Task not found." << std::endl; // Handle the case where task is not found
         }
 				}
+
+    void moveTask(Task* task, int newStatus) {
+        // find the task
+        auto it = std::find_if(tasks.begin(), tasks.end(), [task](const std::unique_ptr<Task>& t) {
+            return t.get() == task; // compare pointers
+        });
+
+        if (it != tasks.end()) { // task found
+            // update the status
+           // (**it).setStatus(newStatus); // Dereference twice to access the task object and call its method
+        }
+        else {
+            // error handling
+        }
+    }
+
+    std::vector<std::unique_ptr<Task>>& getTasks() {
+        return tasks;
+    }
+
+    // Observer pattern
+    void notifyObserver() {
+
+    }
 
 private:
 				std::vector<std::unique_ptr<Task>> tasks; // a list of Task pointers

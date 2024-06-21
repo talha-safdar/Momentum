@@ -33,6 +33,9 @@
     <ClCompile Include="src\controllers\KanbanController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\views\Columns.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\controllers\KanbanController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\views\Columns.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

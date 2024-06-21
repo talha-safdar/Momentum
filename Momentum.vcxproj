@@ -159,7 +159,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\main_frame.cpp" />
+    <ClCompile Include="src\controllers\KanbanController.cpp" />
+    <ClCompile Include="src\views\KanbanBoard.cpp" />
+    <ClCompile Include="src\app.cpp" />
+    <ClCompile Include="src\models\Task.cpp" />
+    <ClCompile Include="src\models\TaskList.cpp" />
+    <ClCompile Include="src\views\TaskCard.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\controllers\KanbanController.h" />
+    <ClInclude Include="src\views\KanbanBoard.h" />
+    <ClInclude Include="src\models\Task.h" />
+    <ClInclude Include="src\models\TaskList.h" />
+    <ClInclude Include="src\views\TaskCard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

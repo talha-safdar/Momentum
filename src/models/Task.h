@@ -30,6 +30,12 @@ public:
 								this->priority = priority;
 				}
 
+				// equality operator
+				bool operator==(const Task& other) const {
+								return (title == other.title &&
+												description == other.description);
+				}
+
 private:
 				std::string title;
 				std::string description;

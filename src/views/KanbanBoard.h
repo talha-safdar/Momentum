@@ -1,79 +1,9 @@
 #pragma once
+#include <wx/wx.h>
 
-#include <wx/scrolwin.h>
-#include <wx/vector.h>
-#include <wx/sharedptr.h>
-#include "Columns.h"
-#include "TaskCard.h"
-#include "../models/Task.h"
-#include "../controllers/KanbanController.h"
-
-class KanbanBoard : wxScrolledWindow {
+class KanbanBoard : wxPanel {
 public:
-				// initialise columns
-				void createColumns(wxSharedPtr<Columns> columns) {
-								// this->columns = columns;
-				}
-
-				void addTaskCard(wxSharedPtr<TaskCard>  taskCard) {
-								taskCards.push_back(taskCard);
-				}
-
-				void removeTaskCard(wxSharedPtr<TaskCard> taskCard) {
-								int indexToRemove = findTaskIndex(taskCard); // Find the index of the task (if it exists)
-								if (indexToRemove != -1) { // Check if the task was found
-												this->taskCards.erase(this->taskCards.begin() + indexToRemove); // Remove the task at the specified index
-												// std::cout << "Task removed successfully!" << std::endl;
-								}
-								else {
-												// std::cout << "Task not found." << std::endl; // Handle the case where task is not found
-								}
-				}
-
-				void moveTaskCard(wxSharedPtr<TaskCard> taskCard, int newStatus) {
-								wxSharedPtr<TaskCard> taskCardToFind;
-								auto it = std::find_if(taskCards.begin(), taskCards.end(), 
-												[taskCard](const wxSharedPtr<TaskCard>& t) {
-												return *t == *taskCard; // compare pointers (operator equality)
-												});
-
-								if (it != taskCards.end()) { // task found
-												// update the status
-											// (**it).setStatus(newStatus); // Dereference twice to access the task object and call its method
-								}
-								else {
-												// error handling
-								}
-				}
-
-				void update() {
-								// called by controller
-				}
-
-				void onDragStart(wxMouseEvent& mouseEvt) {
-								// apply logic
-				}
-
-				void onDragMove(wxMouseEvent& mouseEvt) {
-								// apply logic
-				}
-
-				void onDragEnd(wxMouseEvent& mouseEvt) {
-								// apply logic
-				}
-
+				KanbanBoard(wxWindow* parent, wxWindowID id);
 private:
-				// std::vector<std::unique_ptr<Columns>> columns; // a list of Columns pointers
-				wxVector<wxSharedPtr<TaskCard>> taskCards;
-				// KanbanController* kanbankController;
-
-				// repeated code
-				int findTaskIndex(const wxSharedPtr<TaskCard> taskCard) const {
-								for (size_t i = 0; i < taskCards.size(); i++) {
-												if (taskCards.at(i) == taskCard) {
-																return i;
-												}
-								}
-								return -1; // Task not found
-				}
+				void OnPaint(wxPaintEvent& event);
 };

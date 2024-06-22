@@ -1,23 +1,19 @@
 #pragma once
 
-#include <wx/panel.h>
-#include <wx/stattext.h>
+#include <wx/wx.h>
+#include <wx/sharedptr.h>
 #include "../models/Task.h"
 
 class TaskCard : wxPanel, wxStaticText{
 public:
-    void update() {
-        // update the display based on the task data
-    }
-
-    // equality operator
-    bool operator==(const TaskCard& other) const {
-        return (*task == *other.task); // Compare Task objects (assuming you've overloaded == for Task)
-    }
-
-    // add event handlers for mouse events (click, hover etc.)
+				TaskCard(wxWindow* parent, wxSharedPtr<Task> task);
+				wxString getTitle() const;
+				wxString getDescription() const;
 
 private:
-    Task* task;
+				wxSharedPtr<Task> m_task;
+				wxStaticText title;
+				wxStaticText description;
+				// add more UI later
 };
 

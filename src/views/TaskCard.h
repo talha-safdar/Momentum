@@ -4,11 +4,13 @@
 #include <wx/sharedptr.h>
 #include "../models/Task.h"
 
-class TaskCard : wxPanel, wxStaticText{
+class TaskCard : public wxPanel, wxStaticText{
 public:
-				TaskCard(wxWindow* parent, wxSharedPtr<Task> task);
+				TaskCard(wxWindow* parent, wxWindowID id, wxSharedPtr<Task> task);
+
 				wxString getTitle() const;
 				wxString getDescription() const;
+				static wxString TaskStatusToString(TaskStatus status);
 
 private:
 				wxSharedPtr<Task> m_task;

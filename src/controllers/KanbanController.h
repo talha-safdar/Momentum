@@ -1,37 +1,18 @@
-//#pragma once
-//
-//#include "../models/TaskList.h"
-//#include "../views/KanbanBoard.h"
-//
-//class KanbanController {
-//public:
-//				// KanbanController() {}
-//
-//				void addTask(const std::string& title, const std::string& description) {
-//								task = new Task();
-//								task->setTitle(title);
-//								task->setDescription(description);
-//								taskList->addTask(task);
-//								// kanboard->update(); // to be implemented
-//				}
-//
-//				void editTask(wxSharedPtr<Task> task, wxSharedPtr<Task> updatedTask) {
-//								// find the current task
-//								// update it
-//				}
-//
-//				void removeTask(wxSharedPtr<Task> task) {
-//								taskList->removeTask(task);
-//				}
-//
-//				void moveTask(wxSharedPtr<Task> task, int newStatus) {
-//								taskList->moveTask(task, newStatus);
-//				}
-//				
-//				// more functions to handle user actions
-//
-//private:
-//				TaskList* taskList; // pointer to models
-//				wxSharedPtr<Task> task; // pointer to models
-//				// KanbanBoard* kanboard; // pointer to views
-//};
+#pragma once
+
+#include <wx/wx.h>
+#include <wx/sharedptr.h>
+#include "../models/TaskList.h"
+#include "../views/KanbanBoard.h"
+
+class KanbanController {
+public:
+				KanbanController(TaskList& model, KanbanBoard& view);
+
+				void addTask(const wxString& title, const wxString& description);
+				void moveTask(wxSharedPtr<Task>& task, TaskStatus newStatus);
+
+private:
+				TaskList& m_model;
+				KanbanBoard& m_view;
+};

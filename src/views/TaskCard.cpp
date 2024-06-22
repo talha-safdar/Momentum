@@ -1,6 +1,7 @@
 #include "TaskCard.h"
 
-TaskCard::TaskCard(wxWindow* parent, wxSharedPtr<Task> task) : wxPanel(parent, wxID_ANY), m_task(task) {
+TaskCard::TaskCard(wxWindow* parent, wxWindowID id, wxSharedPtr<Task> task)
+				: wxPanel(parent, id), m_task(task) {
 				// set the size for layout
 				wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -21,4 +22,19 @@ wxString TaskCard::getTitle() const {
 
 wxString TaskCard::getDescription() const {
 				return m_task->getDescription();
+}
+
+wxString TaskCard::TaskStatusToString(TaskStatus status)
+{
+				switch (status) {
+				case TaskStatus::ToDo:
+								return "To Do";
+				case TaskStatus::InProgress:
+								return "In Progress";
+				case TaskStatus::Done:
+								return "Done";
+								// Add cases for other TaskStatus values
+				default:
+								return "Unknown";
+				}
 }

@@ -36,7 +36,7 @@ Momentum::Momentum()
 				}
 
 				// COLUMNS
-				wxPanel* toDoPanel = new wxPanel(this, wxID_ANY, wxPoint(100, 50), wxSize(280, 550));
+				toDoPanel = new wxPanel(this, wxID_ANY, wxPoint(100, 50), wxSize(280, 550));
 				toDoPanel->SetBackgroundColour(wxColor(153, 153, 153));
 				wxPanel* inProgressPanel = new wxPanel(this, wxID_ANY, wxPoint(390, 50), wxSize(280, 550));
 				inProgressPanel->SetBackgroundColour(wxColor(128, 128, 128));
@@ -48,12 +48,59 @@ Momentum::Momentum()
 				topBar->Bind(wxEVT_LEFT_UP, &Momentum::OnPanelLeftMouseUp, this);
 				topBar->Bind(wxEVT_MOTION, &Momentum::OnPanelMouseMove, this);
 				closeButton->Bind(wxEVT_BUTTON, &Momentum::OnTopClicked, this);
+
+				//toDoPanel = new wxPanel(this, wxID_ANY, wxPoint(100, 50), wxSize(280, 550));
+				//toDoPanel->SetBackgroundColour(wxColor(153, 153, 153));
+
+				// Add Card Button
+				// Store original addCardButton color
+				// wxColor* originalButtonColor = addCardButton->GetBackgroundColour();
+				//addCardButton = CreateAddCardButton(toDoPanel);
+				addCardButton = new wxButton(toDoPanel, wxID_ANY, "+ Add Card", wxPoint(10, 10), wxSize(100, 30));
+				addCardButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent&) {
+								CreateNewCard(this); // Call CreateNewCard with the parent panel
+								});
+				addCardButton->Raise();
+
+				Layout();
 }
 
 Momentum::~Momentum()
 {
 				// Restore original style (important for cleanup)
 				SetWindowStyle(originalStyle);
+}
+
+
+
+//wxButton* Momentum::CreateAddCardButton(wxWindow* parent)
+//{
+//				//wxButton* button = new wxButton(parent, wxID_ANY, "+ Add Card", wxPoint(10, 10), wxSize(100, 30));
+//
+//				// Ensure the correct function is bound with the correct parameter 
+//				//button->Bind(wxEVT_BUTTON, [this, parent](wxCommandEvent&) { CreateNewCard(parent); });
+//
+//				return;
+//}
+
+// CreateNewCard method
+void Momentum::CreateNewCard(wxWindow* parent)
+{
+				if (cards.size() >= 3) { // Limit to 3 cards
+								return;
+				}
+
+				int newCardY = 10; // Start at the top
+				if (!cards.empty()) {
+								newCardY = cards.back()->GetPosition().y + cards.back()->GetSize().GetHeight() + 10; // Position below the last card
+				}
+
+				Card* newCard = new Card(toDoPanel, wxID_ANY, wxPoint(10, newCardY), wxSize(260, 100));
+				newCard->Raise();
+				cards.push_back(newCard);
+
+				// Move "Add Card" button below the new card
+				addCardButton->Move(10, newCardY + newCard->GetSize().GetHeight() + 10);
 }
 
 
